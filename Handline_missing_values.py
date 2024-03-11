@@ -46,14 +46,4 @@ else:
     print("Invalid choice.")
 
 print("Missing values handled. Updated data:")
-
-
-print("The distortion is:")
-for column in selected_columns:
-    plt.figure(figsize=(8, 6))
-    plt.hist(data[column], bins=20, color='skyblue', edgecolor='black')
-    plt.title(f'Distribution of {column}')
-    plt.xlabel(column)
-    plt.ylabel('Frequency')
-    plt.grid(True)
-    plt.show()
+print(data.head())
