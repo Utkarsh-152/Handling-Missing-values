@@ -1,5 +1,8 @@
 import pandas as pd
 import numpy as np
+from sklearn.impute import KNNImputer
+from sklearn.experimental import enable_iterative_imputer
+from sklearn.impute import IterativeImputer
 
 # Read data from CSV file
 file_path = input("Enter the file path: ")
@@ -24,6 +27,9 @@ print("3: Median")
 print("4: Random")
 print("5: Assign it as Missing")
 print("6: Delete them")
+print("7: Grouped Fill")
+print("8: K-Nearest Neighbors (KNN)")
+print("9: Multiple Imputation by Chained Equations (MICE)")
 
 choice = int(input("Enter your choice: "))
 
@@ -36,12 +42,28 @@ elif choice == 3:
     data.fillna(data.median(), inplace=True)
 elif choice == 4:
     for column in data.columns:
-        data[column].fillna(np.random.choice(data[column].dropna()), inplace=True)
+        if data[column].dtype in ['float64', 'int64']:  # Random choice for numeric data
+            data[column].fillna(np.random.choice(data[column].dropna()), inplace=True)
+        else:  # Random choice for categorical data
+            data[column].fillna(np.random.choice(data[column].dropna()), inplace=True)
 elif choice == 5:
     # Assign missing values as a string "Missing"
     data.fillna("Missing", inplace=True)
 elif choice == 6:
     data.dropna(inplace=True)
+elif choice == 7:
+    group_by_column = input("Enter the column name to group by: ")
+    if group_by_column in data.columns:
+        for column in data.columns:
+            data[column] = data[column].fillna(data.groupby(group_by_column)[column].transform('mean'))
+    else:
+        print(f"Column {group_by_column} not found.")
+elif choice == 8:
+    imputer = KNNImputer(n_neighbors=5)
+    data = pd.DataFrame(imputer.fit_transform(data), columns=data.columns)
+elif choice == 9:
+    imputer = IterativeImputer(max_iter=10, random_state=0)
+    data = pd.DataFrame(imputer.fit_transform(data), columns=data.columns)
 else:
     print("Invalid choice.")
 
