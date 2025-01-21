@@ -128,20 +128,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Utkarsh-152](https://github.com/Utkarsh-152)
 
 ## ⭐ Support
-If you find this project helpful, please consider giving it a star!
+If you find this code helpful, please consider giving it a star!
 
-
-I've updated the README to:
-1. Match your GitHub repository's style
-2. Added emojis for better visual organization
-3. Included your GitHub username and repository link
-4. Added a support section encouraging stars
-5. Maintained comprehensive documentation while making it more visually appealing
-6. Added detailed sections about each method
-7. Included quick start examples
-
-Would you like me to modify anything else in the README? For example, I could:
-- Add more detailed code examples
-- Include troubleshooting tips
-- Add a roadmap section for future features
-- Include badges (like Python version, license, etc.)
